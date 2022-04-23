@@ -3,8 +3,12 @@ import * as UsersController from '../controllers/users.controller.js';
 
 const router = Router();
 
-router.get('/', UsersController.getAllUsers);
+router.get('/', UsersController.fetchUser);
 
-router.post('/', UsersController.createUser);
+router.post('/register', UsersController.register);
+
+router.post('/login', UsersController.login);
+
+router.post('/prev-login', UsersController.prevLogin);
 
 export default router;
