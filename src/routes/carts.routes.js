@@ -5,7 +5,7 @@ const router = Router();
 
 router.post('/', CartsController.addToCart);
 router.get('/', CartsController.fetchCart);
-router.get('/buy', CartsController.buyCart);
+router.post('/buy', CartsController.buyCart);
 router.delete('/', CartsController.removeFromCart);
 
 export default router;

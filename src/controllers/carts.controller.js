@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import mongoose from 'mongoose';
 import Cart from '../models/cart.model.js';
+import History from '../models/history.model.js';
 
 export const fetchCart = async (req, res) => {
   const { user_id } = req.query;
@@ -51,11 +52,16 @@ export const buyCart = async (req, res) => {
   const { user_id } = req.body;
 
   try {
-    const cart = await Cart.findOneAndUpdate(
-      { user_id },
-      { $set: { items: [] } },
-      { new: true, upsert: true },
-    );
+    const cart = await Cart.findOne({ user_id });
+    // Create a new history with the items from the cart
+    await History.create({
+      user_id,
+      items: cart.items,
+    });
+    // Remove the items from the cart
+    cart.items = [];
+    // Save the cart
+    await cart.save();
     return res.status(200).json(cart);
   } catch (error) {
     return res.status(500).json({ error });
