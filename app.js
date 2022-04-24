@@ -10,6 +10,7 @@ import indexRouter from './src/routes/index.routes.js';
 import usersRouter from './src/routes/users.routes.js';
 import postsRouter from './src/routes/posts.routes.js';
 import reviewsRouter from './src/routes/reviews.routes.js';
+import cartsRouter from './src/routes/carts.routes.js';
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/reviews', reviewsRouter);
+app.use('/cart', cartsRouter);
 
 // Connect database
 connect();
